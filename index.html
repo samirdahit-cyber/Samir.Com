@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMIR DAHIT - UNBREAKABLE VIP V4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #020202;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            opacity: 0.65;
+        }
+
+        @keyframes borderColors {
+            0%, 100% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000; }
+            25% { border-color: #00ff00; box-shadow: 0 0 25px #00ff00; }
+            50% { border-color: #ffff00; box-shadow: 0 0 25px #ffff00; }
+            75% { border-color: #00ffff; box-shadow: 0 0 25px #00ffff; }
+        }
+
+        .vip-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 480px;
+            background: rgba(6, 6, 6, 0.35); 
+            backdrop-filter: blur(5px); 
+            border: 3px solid #ff0000;
+            animation: borderColors 10s infinite linear;
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            margin: 20px;
+        }
+
+        .header-tag {
+            font-size: 12px;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .brand-logo {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        .brand-logo .samir { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+        .brand-logo .dahit { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+
+        .line-divider {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            margin: 20px 0;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .vip-btn {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            background: rgba(15, 15, 15, 0.6);
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .vip-btn i { font-size: 20px; margin-right: 15px; width: 25px; text-align: center; }
+
+        .facebook-link { border: 1px solid #1877f2; color: #1877f2; }
+        .facebook-link:hover { background: #1877f2; color: #fff; box-shadow: 0 0 15px #1877f2; }
+
+        .telegram-link { border: 1px solid #0088cc; color: #0088cc; }
+        .telegram-link:hover { background: #0088cc; color: #fff; box-shadow: 0 0 15px #0088cc; }
+
+        .youtube-link { border: 1px solid #ff0000; color: #ff0000; }
+        .youtube-link:hover { background: #ff0000; color: #fff; box-shadow: 0 0 15px #ff0000; }
+
+        .whatsapp-link { border: 1px solid #25d366; color: #25d366; }
+        .whatsapp-link:hover { background: #25d366; color: #fff; box-shadow: 0 0 15px #25d366; }
+
+        .tiktok-link { border: 1px solid #ffffff; color: #ffffff; }
+        .tiktok-link:hover { background: #ffffff; color: #000; box-shadow: 0 0 15px #ffffff; }
+
+        .instagram-link { border: 1px solid #e1306c; color: #e1306c; }
+        .instagram-link:hover { background: #e1306c; color: #fff; box-shadow: 0 0 15px #e1306c; }
+
+        .tracker-box {
+            background: rgba(5, 5, 5, 0.5);
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: left;
+            font-size: 11px;
+            color: #00ff00;
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        .tracker-title {
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .tracker-line { margin: 6px 0; word-break: break-all; }
+        .t-val { color: #fff; font-weight: bold; }
+        .t-loc { color: #ffff00; font-weight: bold; }
+
+        .copyright { font-size: 10px; color: #888; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<div class="vip-container">
+    <div class="header-tag"><i class="fa-solid fa-terminal"></i> Security Control Panel</div>
+    
+    <div class="brand-logo">
+        <span class="samir">SAMIR</span> <span class="dahit">DAHIT</span>
+    </div>
+    
+    <div class="line-divider"></div>
+
+    <div class="links-grid">
+        
+        <a href="https://www.facebook.com/thw.samir" target="_blank" class="vip-btn facebook-link" onclick="playBeep()">
+            <i class="fa-brands fa-facebook-f"></i> Facebook Account
+        </a>
+        
+        <a href="https://t.me/Samir_Eraxx" target="_blank" class="vip-btn telegram-link" onclick="playBeep()">
+            <i class="fa-brands fa-telegram"></i> Telegram Account
+        </a>
+        
+        <a href="https://youtube.com/@samir_hero16" target="_blank" class="vip-btn youtube-link" onclick="playBeep()">
+            <i class="fa-brands fa-youtube"></i> YouTube Channel
+        </a>
+        
+        <a href="https://wa.me/+9779820442753" target="_blank" class="vip-btn whatsapp-link" onclick="playBeep()">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Number
+        </a>
+        
+        <a href="https://www.tiktok.com/@samir_editz_16" target="_blank" class="vip-btn tiktok-link" onclick="playBeep()">
+            <i class="fa-brands fa-tiktok"></i> TikTok ID
+        </a>
+        
+        <a href="https://www.instagram.com/samir.hero.16" target="_blank" class="vip-btn instagram-link" onclick="playBeep()">
+            <i class="fa-brands fa-instagram"></i> Instagram Profile
+        </a>
+        
+    </div>
+
+    <div class="line-divider"></div>
+
+    <div class="tracker-box">
+        <div class="tracker-title">⚠️ SYSTEM INTERCEPT COMPLETED ⚠️</div>
+        <div class="tracker-line">🔴 TARGET IP ADDRESS : <span id="user-ip" class="t-val">Fetching IP...</span></div>
+        <div class="tracker-line">📱 DEVICE BRAND / MODEL: <span id="user-device" class="t-val">Scanning hardware...</span></div>
+        <div class="tracker-line">💻 SYSTEM OS & KERNEL : <span id="user-os" class="t-val">Analyzing kernel...</span></div>
+        <div class="tracker-line">📍 TARGET LIVE LOCATION: <span id="user-location" class="t-loc">Locating via GPS/ISP...</span></div>
+        <div class="tracker-line">📡 NETWORK OPERATOR  : <span id="user-isp" class="t-val">Checking provider...</span></div>
+    </div>
+
+    <div class="copyright">SECURED BY SAMIR DAHIT © 2026</div>
+</div>
+
+<script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ☠⚡☣★';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(2, 2, 2, 0.06)'; 
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillStyle = Math.random() > 0.5 ? '#ff0000' : '#00ff00';
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 30);
+
+    function playBeep() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(850, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.08);
+    }
+
+    function advancedDeviceDetector() {
+        const ua = navigator.userAgent;
+        let deviceModel = "Generic Device";
+        let osName = "Unknown System";
+
+        if (/iphone|ipad|ipod/i.test(ua)) {
+            deviceModel = "Apple iPhone / iPad";
+            osName = "iOS Operating System";
+        } else if (/samsung/i.test(ua)) {
+            deviceModel = "Samsung Galaxy Series";
+            osName = "Android OS";
+        } else if (/redmi|xiaomi|mi /i.test(ua)) {
+            deviceModel = "Xiaomi / Redmi Phone";
+            osName = "Android OS (MIUI/HyperOS)";
+        } else if (/oppo/i.test(ua)) {
+            deviceModel = "Oppo SmartPhone";
+            osName = "Android OS (ColorOS)";
+        } else if (/vivo/i.test(ua)) {
+            deviceModel = "Vivo SmartPhone";
+            osName = "Android OS (Funtouch)";
+        } else if (/oneplus/i.test(ua)) {
+            deviceModel = "OnePlus Premium Device";
+            osName = "Android OS (OxygenOS)";
+        } else if (/huawei|honor/i.test(ua)) {
+            deviceModel = "Huawei / Honor Device";
+            osName = "Android OS";
+        } else if (/realme/i.test(ua)) {
+            deviceModel = "Realme SmartPhone";
+            osName = "Android OS";
+        } else if (/android/i.test(ua)) {
+            deviceModel = "Android Touch Device";
+            osName = "Android OS / Linux Kernel";
+        } else if (/windows nt/i.test(ua)) {
+            deviceModel = "Desktop PC / Laptop";
+            osName = "Windows Operating System";
+        } else if (/linux/i.test(ua)) {
+            deviceModel = "Linux Workstation";
+            osName = "Linux Console / Termux";
+        }
+
+        document.getElementById('user-device').innerText = deviceModel;
+        document.getElementById('user-os').innerText = osName;
+    }
+
+    async function getLiveGeoLocation() {
+        try {
+            const res = await fetch('https://ipwho.is/');
+            const data = await res.json();
+            
+            if (data.success) {
+                document.getElementById('user-ip').innerText = data.ip;
+                
+                const city = data.city ? data.city : "Unknown City";
+                const region = data.region ? data.region : "Unknown Region";
+                const country = data.country ? data.country : "Unknown Country";
+                const lat = data.latitude ? data.latitude.toFixed(4) : "0";
+                const lon = data.longitude ? data.longitude.toFixed(4) : "0";
+                
+                document.getElementById('user-location').innerText = `${city}, ${region}, ${country} [LAT: ${lat} | LON: ${lon}]`;
+                document.getElementById('user-isp').innerText = data.connection.isp ? data.connection.isp : "Unknown Provider";
+            } else {
+                fallbackMethod();
+            }
+        } catch (e) {
+            fallbackMethod();
+        }
+    }
+
+    function fallbackMethod() {
+        document.getElementById('user-ip').innerText = "127.0.0.1 (Proxy/VPN Detected)";
+        document.getElementById('user-location').innerText = "Kathmandu, Bagmati, Nepal [GPS Secure]";
+        document.getElementById('user-isp').innerText = "Ncell / Nepal Telecom";
+    }
+
+    advancedDeviceDetector();
+    getLiveGeoLocation();
+</script>
+</body>
+</html>
